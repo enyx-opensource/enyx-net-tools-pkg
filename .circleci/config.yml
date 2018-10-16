@@ -1,0 +1,37 @@
+version: 2
+
+jobs:
+    centos_build:
+        docker:
+            - image: centos:latest
+        steps:
+            - run:
+                name: Install dependencies
+                command: |
+                    yum install -y epel-release
+                    yum install -y gcc-c++ rpm-build rpm-devel rpmlint make python bash coreutils diffutils patch rpmdevtools cmake3 boost-devel git openssh-clients
+            - checkout
+            - run:
+                name: Setup environement
+                command: rpmdev-setuptree
+            - run:
+                name: Download source
+                command: spectool --get-files --sourcedir enyx-net-tools.spec
+            - run:
+                name: Build package
+                command: rpmbuild -ba enyx-net-tools.spec
+            - run:
+                name: Check package integrity
+                command: rpmlint /root/rpmbuild/
+            - store_artifacts:
+                path: /root/rpmbuild/RPMS
+                destination: net-tools/centos/
+            - store_artifacts:
+                path: /root/rpmbuild/SRPMS
+                destination: net-tools/centos/
+
+workflows:
+    version: 2
+    all_ditro:
+        jobs:
+            - centos_build
