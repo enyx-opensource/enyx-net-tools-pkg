@@ -1,6 +1,6 @@
 Name: enyx-net-tools
 Release: 1%{dist}
-Version: 0.1.5
+Version: 0.1.6
 License: GPLv3
 URL: http://www.enyx.fr
 BuildRequires: cmake3 boost-devel
@@ -35,6 +35,8 @@ cmake3 -DCMAKE_INSTALL_PREFIX=%{_prefix} \
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %changelog
+* Fri Mar 29 2019 Enyx <support@enyx.fr> - 0.1.6-1
+    - Follow upstream 0.1.6.
 * Mon Jan 21 2019 Enyx <support@enyx.fr> - 0.1.5-1
     - Follow upstream 0.1.5.
 * Mon Jan 21 2019 Enyx <support@enyx.fr> - 0.1.4-1
