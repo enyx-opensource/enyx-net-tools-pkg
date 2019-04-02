@@ -1,6 +1,6 @@
 Name: enyx-net-tools
 Release: 1%{dist}
-Version: 0.1.6
+Version: 0.1.7
 License: GPLv3
 URL: http://www.enyx.fr
 BuildRequires: cmake3 boost-devel
@@ -21,20 +21,19 @@ a software application with the Enyx TCP or UDP hardware IP.
 %autosetup -n net-tools-%{version}
 
 %build
-cmake3 -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-       -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
-      .
+%cmake3 .
 %{__make} %{?_smp_mflags}
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf %{buildroot}
 %make_install
 
 %clean
-%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf %{buildroot}
 
 %changelog
+* Tue Apr 02 2019 Enyx <support@enyx.fr> - 0.1.7-1
+    - Follow upstream 0.1.7.
 * Fri Mar 29 2019 Enyx <support@enyx.fr> - 0.1.6-1
     - Follow upstream 0.1.6.
 * Mon Jan 21 2019 Enyx <support@enyx.fr> - 0.1.5-1
